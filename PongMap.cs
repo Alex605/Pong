@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+//Use this to set the dimensions of the Pong map. 
 namespace PongOOP
 {
 	class PongMap

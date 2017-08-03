@@ -6,55 +6,54 @@ namespace PongOOP
 {
 	public class Ball
 	{
-		Form1 form;
-		private PictureBox ballPictureBox, ballModel;
+		private PictureBox ball;
 		Random rand = new Random();
 		Player leftsidePlayer, rightsidePlayer;
 		int xSpeed, ySpeed;
 
-		public Ball(Form1 form, PictureBox PongBall, Player leftsidePlayer, Player rightsidePlayer)
+		public Ball(PictureBox PongBall, Player leftsidePlayer, Player rightsidePlayer)
 		{
-			this.form = form;
-			ballModel = PongBall;
-			this.ballPictureBox = new PictureBox();
-			this.ballPictureBox.Image = PongBall.Image;
-			this.ballPictureBox.Size = PongBall.Size;
-			form.Controls.Add(ballPictureBox);
+			this.ball = PongBall;
 			this.leftsidePlayer = leftsidePlayer;
 			this.rightsidePlayer = rightsidePlayer;
+			xSpeed = 1;
+			ySpeed = 2;
 			ResetBall();
 		}
 
+		//Movement, including the ball speed
 		internal bool Move()
 		{
 			DoMove();
 
-			var bottom = PongMap.bottomOfMap - ballPictureBox.Height;
-			if (ballPictureBox.Location.Y >= bottom || ballPictureBox.Location.Y <= PongMap.topOfMap)
+			var bottom = PongMap.bottomOfMap - ball.Height;
+
+			if (ball.Location.Y >= bottom || ball.Location.Y <= PongMap.topOfMap)
 			{
 				ySpeed *= -1;
 			}
 
-			if (ballPictureBox.Location.X <= PongMap.leftOfMap)
+			if (ball.Location.X <= PongMap.leftOfMap)
 			{
 				Score(leftsidePlayer);
 				return true;
 			}
-			else if (ballPictureBox.Location.X >= PongMap.rightOfMap - ballPictureBox.Width)
+			else if (ball.Location.X >= PongMap.rightOfMap - ball.Width)
 			{
 				Score(rightsidePlayer);
 				return true;
 			}
 
-			if (leftsidePlayer.paddle.Bounds.IntersectsWith(ballPictureBox.Bounds)
-				|| rightsidePlayer.paddle.Bounds.IntersectsWith(ballPictureBox.Bounds))
+
+			if (leftsidePlayer.paddle.Bounds.IntersectsWith(ball.Bounds)
+				|| rightsidePlayer.paddle.Bounds.IntersectsWith(ball.Bounds))
 			{
-				xSpeed *= -1;
+				
+				xSpeed *= -2;
+				ySpeed *= 1;
 
-				form.ballList.Add(new Ball(form, ballModel, leftsidePlayer, rightsidePlayer));
-
-				while (leftsidePlayer.paddle.Bounds.IntersectsWith(ballPictureBox.Bounds) 
-					|| rightsidePlayer.paddle.Bounds.IntersectsWith(ballPictureBox.Bounds))
+				while (leftsidePlayer.paddle.Bounds.IntersectsWith(ball.Bounds) 
+					|| rightsidePlayer.paddle.Bounds.IntersectsWith(ball.Bounds))
 				{
 					DoMove();
 				}
@@ -65,22 +64,23 @@ namespace PongOOP
 
 		private int DoMove()
 		{
-			var bottom = PongMap.bottomOfMap - ballPictureBox.Height;
-			ballPictureBox.Location = new Point(ballPictureBox.Location.X + xSpeed,
-				Math.Max(PongMap.topOfMap, Math.Min(bottom, ballPictureBox.Location.Y + ySpeed))
+			var bottom = PongMap.bottomOfMap - ball.Height;
+			ball.Location = new Point(ball.Location.X + xSpeed,
+				Math.Max(PongMap.topOfMap, Math.Min(bottom, ball.Location.Y + ySpeed))
 				);
 			return bottom;
 		}
 
+		//When a player scores, increase their score count.
 		private void Score(Player winningPlayer)
 		{
 			winningPlayer.score++;
-			form.Controls.Remove(ballPictureBox);
 		}
 
+		//Resets after a player scores
 		private void ResetBall()
 		{
-			ballPictureBox.Location = new Point((PongMap.leftOfMap + PongMap.rightOfMap) / 2,
+			ball.Location = new Point((PongMap.leftOfMap + PongMap.rightOfMap) / 2,
 							(PongMap.topOfMap + PongMap.bottomOfMap) / 2);
 			do
 			{

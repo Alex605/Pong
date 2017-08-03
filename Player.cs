@@ -9,7 +9,7 @@ namespace PongOOP
 {
 	public class Player
 	{
-		const int movementSpeed = 3;
+		const int movementSpeed = 5;
 
 		public bool isUpPressed, isDownPressed;
 

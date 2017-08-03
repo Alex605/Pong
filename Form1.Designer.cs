@@ -30,6 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+			this.PongBall = new System.Windows.Forms.PictureBox();
 			this.Paddle1 = new System.Windows.Forms.PictureBox();
 			this.Paddle2 = new System.Windows.Forms.PictureBox();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -38,12 +39,20 @@
 			this.LabelPlayer2 = new System.Windows.Forms.Label();
 			this.ScoreDivider = new System.Windows.Forms.Label();
 			this.LabelScore = new System.Windows.Forms.Label();
-			this.PongBall = new System.Windows.Forms.PictureBox();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			((System.ComponentModel.ISupportInitialize)(this.PongBall)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Paddle1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Paddle2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.PongBall)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// PongBall
+			// 
+			this.PongBall.Image = ((System.Drawing.Image)(resources.GetObject("PongBall.Image")));
+			this.PongBall.Location = new System.Drawing.Point(675, 247);
+			this.PongBall.Name = "PongBall";
+			this.PongBall.Size = new System.Drawing.Size(20, 20);
+			this.PongBall.TabIndex = 11;
+			this.PongBall.TabStop = false;
 			// 
 			// Paddle1
 			// 
@@ -66,7 +75,7 @@
 			// timer1
 			// 
 			this.timer1.Enabled = true;
-			this.timer1.Interval = 1;
+			this.timer1.Interval = 10;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// label1
@@ -123,15 +132,6 @@
 			this.LabelScore.TabIndex = 10;
 			this.LabelScore.Text = "Score";
 			// 
-			// PongBall
-			// 
-			this.PongBall.Image = ((System.Drawing.Image)(resources.GetObject("PongBall.Image")));
-			this.PongBall.Location = new System.Drawing.Point(675, 247);
-			this.PongBall.Name = "PongBall";
-			this.PongBall.Size = new System.Drawing.Size(20, 20);
-			this.PongBall.TabIndex = 11;
-			this.PongBall.TabStop = false;
-			// 
 			// textBox1
 			// 
 			this.textBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -167,9 +167,9 @@
 			this.Text = "Pong";
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+			((System.ComponentModel.ISupportInitialize)(this.PongBall)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Paddle1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Paddle2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.PongBall)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -186,7 +186,7 @@
 		private System.Windows.Forms.Label ScoreDivider;
 		private System.Windows.Forms.Label LabelScore;
 		private System.Windows.Forms.TextBox textBox1;
-		public System.Windows.Forms.PictureBox PongBall;
+		private System.Windows.Forms.PictureBox PongBall;
 	}
 }
 

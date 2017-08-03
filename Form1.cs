@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // I decided to not go with Tetris because I had trouble wrapping my mind around creating it.
-// I still wanted to stick to a classic video game and the same project plan, so I went with Pong instead.
-//
+// I still wanted to stick to an Object Oriented classic video game and the same project plan, so I went with Pong instead.
 
 namespace PongOOP
 {
@@ -19,6 +18,7 @@ namespace PongOOP
 		Player player1, player2;
 		public List<Ball> ballList;
 
+		//Initalize everything for the program.
 		public Form1()
 		{
 			InitializeComponent();
@@ -29,9 +29,11 @@ namespace PongOOP
 			StartNewGame();
 		}
 
+
+		//The process at the start of the game
 		private void StartNewGame()
 		{
-			ballList.Add(new Ball(this, PongBall, player1, player2));
+			ballList.Add(new Ball(PongBall, player1, player2));
 		}
 		private void timer1_Tick(object sender, EventArgs e)
 		{
@@ -52,6 +54,7 @@ namespace PongOOP
 			}
 		}
 
+	//Game controls section
 	private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
 			CheckKeys(e, true);
@@ -62,6 +65,8 @@ namespace PongOOP
 			CheckKeys(e, false);
 		}
 
+		//Player 1 uses W and S to move
+		//Player 2 uses the Up and Down arrow keys to move.
 		private void CheckKeys(KeyEventArgs e, bool isDown)
 		{
 			switch (e.KeyCode)
